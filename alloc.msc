@@ -1,0 +1,10 @@
+extern fn free(*null p) -> null
+extern fn malloc(i32 s) -> *null
+
+fn core_msc_free(*null ptr) export -> null {
+	return free(ptr)
+}
+
+fn core_msc_manmalloc(i32 size) export -> *null {
+	return malloc(size)
+}
