@@ -11,7 +11,7 @@ fn manmalloc(i32 size) export -> *any {
 }
 
 fn amalloc(i32 size) auto_free export -> *any {
-	return malloc(size)
+	return manmalloc(size)
 }
 
 fn manrealloc(*any ptr, i32 size) export -> *any {
@@ -19,5 +19,5 @@ fn manrealloc(*any ptr, i32 size) export -> *any {
 }
 
 fn arealloc(*any ptr, i32 size) auto_free export -> *any {
-	return realloc(ptr, size)
+	return manrealloc(ptr, size)
 }
