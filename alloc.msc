@@ -1,10 +1,23 @@
-extern fn free(*null p) -> null
+extern fn free(*any p) -> null
 extern fn malloc(i32 s) -> *null
+extern fn realloc(*any p, i32 s) -> *null
 
-fn core_msc_free(*null ptr) export -> null {
+fn manfree(*any ptr) export -> null {
 	return free(ptr)
 }
 
-fn core_msc_manmalloc(i32 size) export -> *null {
+fn manmalloc(i32 size) export -> *any {
 	return malloc(size)
+}
+
+fn amalloc(i32 size) auto_free export -> *any {
+	return malloc(size)
+}
+
+fn manrealloc(*any ptr, i32 size) export -> *any {
+	return realloc(size)
+}
+
+fn arealloc(*any ptr, i32 size) auto_free export -> *any {
+	return realloc(ptr, size)
 }
