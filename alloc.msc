@@ -1,23 +1,15 @@
 extern fn free(*any p) -> null
-extern fn malloc(i32 s) -> *null
-extern fn realloc(*any p, i32 s) -> *null
+extern fn malloc(i32 s) -> *any
+extern fn realloc(*any p, i32 s) -> *any
 
-fn manfree(*any ptr) export -> null {
+fn memfree(*any ptr) dealloc export -> null {
 	return free(ptr)
 }
 
-fn manmalloc(i32 size) export -> *any {
+fn memalloc(i32 size) must_free alloc export -> *any {
 	return malloc(size)
 }
 
-fn amalloc(i32 size) auto_free export -> *any {
-	return manmalloc(size)
-}
-
-fn manrealloc(*any ptr, i32 size) export -> *any {
-	return realloc(size)
-}
-
-fn arealloc(*any ptr, i32 size) auto_free export -> *any {
-	return manrealloc(ptr, size)
+fn memrealloc(*any ptr, i32 size) must_free alloc export -> *any {
+	return realloc(ptr, size)
 }
